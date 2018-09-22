@@ -1,0 +1,36 @@
+{
+  "name": "bkd-puppeteer",
+  "version": "1.0.0",
+  "description": "Having some web scrapping fun with Puppeteer",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "chalk": "^2.4.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/ScoutsOut/bkd-puppeteer.git"
+  },
+  "keywords": [
+    "puppeteer",
+    "google",
+    "puppeteer",
+    "javascript",
+    "headless",
+    "chrome",
+    "screenshots",
+    "ui",
+    "testing",
+    "web",
+    "scrapper"
+  ],
+  "author": "Cesar M. Perez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ScoutsOut/bkd-puppeteer/issues"
+  },
+  "homepage": "https://github.com/ScoutsOut/bkd-puppeteer#readme"
+}
