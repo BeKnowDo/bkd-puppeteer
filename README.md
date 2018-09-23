@@ -11,8 +11,7 @@ Then we simply iterate through that array, `goto` that url and take both a defau
 <hr />
 
 ## Installation & Configuration
-- Git clone `https://github.com/ScoutsOut/bkd-puppeteer`
-- Run `npm i`
+- `npm i bkd-puppeteer`
 - Create an `.env` file in the root of the project's directory
   - You'll also need to provide a few baseline variables as shown below *(If the site has simple authentication, provide a username and password):*
   ```
