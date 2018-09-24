@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Having some web scrapping fun with Puppeteer",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "figlet": "^1.2.0"
+  },
   "devDependencies": {
     "args": "^5.0.0",
     "chalk": "^2.4.1",

@@ -3,24 +3,27 @@ const { prompt } = require('inquirer')
 const puppeteer = require('puppeteer')
 const devices = require('puppeteer/DeviceDescriptors')
 const chalk = require('chalk')
+const figlet = require('figlet')
 const puppetConfig = require('../configure')
+
 console.clear()
 
 const user = process.env.USER
 const pass = process.env.PASS
-let host = `${process.env.HOST}`
 
 module.exports = class BKD_PUPPET_TOOLS {
   constructor () {
+    this.host = ''
     this.screenshotExtension = 'jpeg'
     this.pageList = puppetConfig.pages || []
     this.deviceList = puppetConfig.devices
     this.initialQuestions = puppetConfig.initialQuestions
     this.screenshotQuestions = puppetConfig.screenshotQuestions
+    this.targetWebsiteQuestions = puppetConfig.targetWebsiteQuestions
   }
 
   async findNavigationItems () {
-    const targetUrl = host
+    const targetUrl = this.host
     const browser = await puppeteer.launch()
     const puppet = await browser.newPage()
 
@@ -29,7 +32,7 @@ module.exports = class BKD_PUPPET_TOOLS {
     // Extract the results from the puppet.1
     let urls = await puppet.evaluate(() => {
       let links = []
-      const navigation = document.querySelectorAll('nav ul li a')
+      const navigation = document.querySelectorAll('nav li a')
 
       navigation.forEach(item => {
         const title = item.textContent.split('|')[0].trim()
@@ -47,23 +50,69 @@ module.exports = class BKD_PUPPET_TOOLS {
     this.takeScreenshots()
   }
 
-  cli () {
+  welcomeMessage () {
+    figlet.text('Puppeteer \nScreenshot\n Generator', {
+      font: 'Standard'
+    },
+    (err, data) => {
+      if (err) {
+        console.log(chalk.bgWhite.red(`So...we though that'd work too. We've been alerted and are working on it`))
+        return
+      }
+      console.log(data)
+      this.init()
+    })
+  }
+
+  init () {
     prompt(this.initialQuestions)
       .then(answers => {
         this.initialQuestion(answers)
       })
   }
 
+  askTargetWebsite () {
+    prompt(this.targetWebsiteQuestions)
+      .then(answers => {
+        const url = answers.response
+        const validation = this.urlValidator(url)
+
+        if (validation) {
+          this.host = url
+          this.askScreenshotOptions()
+        } else {
+          console.clear()
+          console.log(chalk.red.bgBlack(`We need the full URL. For example: http://www.google.com. NOT: google.com  :) Try again...`))
+          this.askTargetWebsite()
+        }
+      })
+  }
+
+  urlValidator (host) {
+    try {
+      new URL(host)
+      return true
+    } catch (_) {
+      return false
+    }
+  }
+
   initialQuestion (answers) {
-    const path = answers.functions ? answers.functions : 'none'
+    const path = answers.response ? answers.response : 'none'
 
     switch (path) {
       case 'none':
         console.log('nothing provided')
         break
 
+      case 'exit':
+        console.clear()
+        console.log(chalk.green(`Thanks for using BKD's Screenshot generator. If you have feedback to share, don't hesitate to email bkd@bkd.io`))
+        break
+
       case 'screenshots':
-        this.questionScreenshotType()
+        console.clear()
+        this.askTargetWebsite()
         break
 
       default:
@@ -71,10 +120,10 @@ module.exports = class BKD_PUPPET_TOOLS {
     }
   }
 
-  questionScreenshotType () {
+  askScreenshotOptions () {
     prompt(this.screenshotQuestions)
       .then(answers => {
-        const path = answers.functions ? answers.functions : 'none'
+        const path = answers.response ? answers.response : 'none'
 
         switch (path) {
           case 'none':
@@ -113,14 +162,14 @@ module.exports = class BKD_PUPPET_TOOLS {
             for (o; o < this.deviceList.length; o++) {
               const deviceName = this.deviceList[o].name
               const folder = deviceName.replace(/\s/g, '')
-              host = host.replace('https://', '')
-              host = host.replace('//', '')
-              host = host.replace('www', '')
-              host = host.replace(/[^A-Za-z0-9 ]/g, '')
-              host = host.replace(/\s{2,}/g, ' ')
-              host = host.replace(/\s/g, '-')
+              this.host = this.host.replace('https://', '')
+              this.host = this.host.replace('//', '')
+              this.host = this.host.replace('www', '')
+              this.host = this.host.replace(/[^A-Za-z0-9 ]/g, '')
+              this.host = this.host.replace(/\s{2,}/g, ' ')
+              this.host = this.host.replace(/\s/g, '-')
 
-              const rootUrl = `${process.env.DESTINATION}/${host}/${name}/`
+              const rootUrl = `${process.env.DESTINATION}/${this.host}/${name}/`
               const width = devices[deviceName].viewport.width
               const height = devices[deviceName].viewport.height
 

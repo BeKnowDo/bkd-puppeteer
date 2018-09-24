@@ -1,12 +1,9 @@
 'use strict'
 
-const path = require('path')
-const fs = require('fs')
-const url = require('url')
-
 // Make sure any symlinks in the project folder are resolved:
 // https://github.com/facebookincubator/create-react-app/issues/637
 module.exports = {
+
   devices: [
     {
       'name': 'iPhone 6 Plus'
@@ -36,10 +33,11 @@ module.exports = {
       'name': 'iPad Pro'
     }
   ],
+
   initialQuestions: [
     {
       type: 'list',
-      name: 'functions',
+      name: 'response',
       message: 'What would you like to do?',
       choices: [
         {
@@ -51,14 +49,28 @@ module.exports = {
           key: 'l',
           name: 'Load test the server',
           value: 'loadtest'
+        },
+        {
+          key: 'x',
+          name: 'Get me out of here!',
+          value: 'exit'
         }
       ]
     }
   ],
+
+  targetWebsiteQuestions: [
+    {
+      type: 'input',
+      name: 'response',
+      message: 'Which website would you like to target? (fully qualified url expected: https://domain.com)'
+    }
+  ],
+
   screenshotQuestions: [
     {
       type: 'list',
-      name: 'functions',
+      name: 'response',
       message: 'Which pages should we capture?',
       choices: [
         {
