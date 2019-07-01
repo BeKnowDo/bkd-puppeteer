@@ -26,14 +26,14 @@ Then we simply iterate through that array, `goto` that url and take both a defau
 - The file names have the following format: `Page name - Device name - Height - width.jpg`
   - Realworld example: ```Contact Us-iPad-768x1024.fullscreen.jpg```
 
-###Available Scripts
+### Available Scripts
 - `npm run puppet`
 - `npm run puppet-dev` - only difference is the use of nodemon
 
 <hr />
-#####That's pretty much it. I know. Nothing Earth shattering but clients find it useful because it's a real time-saver in UI Regression Testing.
+##### That's pretty much it. I know. Nothing Earth shattering but clients find it useful because it's a real time-saver in UI Regression Testing.
 
-#####Hopefully someone out there will find this helpful. I'm going to continue to extend this (mostly for my own personal development).
+##### Hopefully someone out there will find this helpful. I'm going to continue to extend this (mostly for my own personal development).
 
 
 <p style="font-weight: 700; font-size: 24px; text-align: center; margin-top: 35px;">
