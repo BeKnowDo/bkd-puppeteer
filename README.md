@@ -31,9 +31,10 @@ Then we simply iterate through that array, `goto` that url and take both a defau
 - `npm run puppet-dev` - only difference is the use of nodemon
 
 <hr />
-##### That's pretty much it. I know. Nothing Earth shattering but clients find it useful because it's a real time-saver in UI Regression Testing.
 
-##### Hopefully someone out there will find this helpful. I'm going to continue to extend this (mostly for my own personal development).
+#### That's pretty much it. I know. Nothing Earth shattering but clients find it useful because it's a real time-saver in UI Regression Testing.
+
+#### Hopefully someone out there will find this helpful. I'm going to continue to extend this (mostly for my own personal development).
 
 
 <p style="font-weight: 700; font-size: 24px; text-align: center; margin-top: 35px;">
