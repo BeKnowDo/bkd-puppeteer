@@ -26,7 +26,7 @@ Then we simply iterate through that array, use Puppeteer's `goto` method to capt
   ```
 
 ## Where screenshots are published
-- Screenshots are generated into the directory you've indicated in `.evn`
+- Screenshots are generated into the directory you've indicated in `.env`
 - Filenames follow this format: `Page name - Device name - Height - width.jpg`
   - Realworld example: ```Contact-Us-iPad-768x1024.fullscreen.jpg```
 
