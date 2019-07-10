@@ -4,16 +4,20 @@ This is a straight forward Puppeteer based website screenshot generator.
 
 # How it works
 
-We use Puppeteer to initially try and fetch the first nav > ul > li > a of a given domain.
+We use Puppeteer to identify and capture any given website's primary navigation links (urls): nav > ul > li > a.
 
-For every qualifying navigation item we find, we push the title and href values into an array.
-Then we simply iterate through that array, `goto` that url and take both a default deview viewport screenshot as well as a full-page screenshot.
+For every qualified navigation item, we capture and add the title and href values into an array.
+Then we simply iterate through that array, use Puppeteer's `goto` method to capture both default viewport and full-page screenshots.
 <hr />
 
 ## Installation & Configuration
 - `npm i bkd-puppeteer`
 - Create an `.env` file in the root of the project's directory
-  - You'll also need to provide a few baseline variables as shown below *(If the site has simple authentication, provide a username and password):*
+  - Add baseline variables as shown below
+  
+  *(If the site has simple authentication, provide a username and password):*
+
+
   ```
   HOST=https://npr.com
   USER=yourUserName
@@ -21,10 +25,10 @@ Then we simply iterate through that array, `goto` that url and take both a defau
   DESTINATION=build-directory-of-choice
   ```
 
-## Where generated screenshots are generated
-- Whichever directory you've dicated within `.evn`, the Puppeteer bot will create directories by page and device.
-- The file names have the following format: `Page name - Device name - Height - width.jpg`
-  - Realworld example: ```Contact Us-iPad-768x1024.fullscreen.jpg```
+## Where screenshots are published
+- Screenshots are generated into the directory you've indicated in `.evn`
+- Filenames follow this format: `Page name - Device name - Height - width.jpg`
+  - Realworld example: ```Contact-Us-iPad-768x1024.fullscreen.jpg```
 
 ### Available Scripts
 - `npm run puppet`
